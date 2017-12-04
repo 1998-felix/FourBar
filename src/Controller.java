@@ -1,6 +1,7 @@
+import java.awt.BasicStroke;
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
@@ -12,6 +13,11 @@ public class Controller extends Canvas implements Runnable {
 	private MouseInput mouseInput;
 	private boolean running;
 	private Thread thread;
+	private double similarity;
+	
+	public void compare(ArrayList<Point2D> draw1, ArrayList<Point2D> draw2) {
+		
+	}
 	
 	public void drag(int mouseX, int mouseY) {
 		drawing.add(new Point2D.Double(mouseX, mouseY));
@@ -32,15 +38,16 @@ public class Controller extends Canvas implements Runnable {
 			return;
 		}
 		
-		Graphics g = bs.getDrawGraphics();
+		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 		
 		g.setColor(Color.white);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		g.setColor(Color.black);
 		for(int i=0;i<drawing.size();i++) {
-			g.fillRect((int) drawing.get(i).getX()-2, (int) drawing.get(i).getY()-2, 4, 4);
+			//g.fillRect((int) drawing.get(i).getX()-2, (int) drawing.get(i).getY()-2, 4, 4);
 			if(i>0) {
+				g.setStroke(new BasicStroke(5));
 				g.drawLine((int) drawing.get(i).getX(), (int) drawing.get(i).getY(), (int) drawing.get(i-1).getX(), (int) drawing.get(i-1).getY());
 			}
 		}
