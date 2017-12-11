@@ -14,6 +14,7 @@ public class Controller extends Canvas implements Runnable {
 	private boolean running;
 	private Thread thread;
 	private double similarity;
+	private Linkage linkage;
 	
 	public void compare(ArrayList<Point2D> draw1, ArrayList<Point2D> draw2) {
 		
@@ -105,6 +106,8 @@ public class Controller extends Canvas implements Runnable {
 			}
 		}
 		
+		linkage.render(g);
+		
 		g.dispose();
 		bs.show();
 	}
@@ -155,6 +158,7 @@ public class Controller extends Canvas implements Runnable {
 		mouseInput = new MouseInput(this);
 		this.addMouseListener(mouseInput);
 		this.addMouseMotionListener(mouseInput);
+		linkage = new Linkage();
 	}
 	
 	public static void main(String[] args) {
