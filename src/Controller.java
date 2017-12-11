@@ -19,6 +19,59 @@ public class Controller extends Canvas implements Runnable {
 		
 	}
 	
+	public ArrayList<Point2D> rescale(ArrayList<Point2D> fourBarPointsTemp, ArrayList<Point2D> drawingPointsTemp){
+		
+		ArrayList<Point2D>  fourBarPoints = new ArrayList<Point2D>();
+		ArrayList<Point2D>  drawingPoints = new ArrayList<Point2D>();
+		fourBarPoints = fourBarPointsTemp;
+		drawingPoints = drawingPointsTemp;
+		ArrayList<Point2D> outputMe  = new ArrayList<Point2D>();
+			
+		
+		
+		double scaling = ((getMaxX(fourBarPoints) - getMinX(fourBarPoints)) / (getMaxX(drawingPoints) - getMinX(drawingPoints)));
+		double minX = getMinX(drawingPoints);
+		double minY = getMinY(drawingPoints);
+		
+		for(int i=0; i<= drawingPoints.size(); i++){
+			
+			outputMe.set(i, new Point2D.Double((drawingPoints.get(i).getX() - minX)*scaling,(drawingPoints.get(i).getY() - minY)*scaling));
+			
+		}
+		return outputMe;
+		
+	}
+	public double getMinX(ArrayList<Point2D> points){
+		
+		double val = points.get(0).getX();
+		for(int i=0; i<= points.size(); i++){
+			if(val>points.get(i).getX()){
+				val = points.get(i).getX();
+			}	
+		}
+		return(val);
+	}
+	public double getMaxX(ArrayList<Point2D> points){
+		
+		double val = points.get(0).getX();
+		for(int i=0; i<= points.size(); i++){
+			if(val<points.get(i).getX()){
+				val = points.get(i).getX();
+			}	
+		}
+		return(val);
+	}
+	public double getMinY(ArrayList<Point2D> points){
+		
+		double val = points.get(0).getY();
+		for(int i=0; i<= points.size(); i++){
+			if(val>points.get(i).getY()){
+				val = points.get(i).getY();
+			}	
+		}
+		return(val);
+	}
+	
 	public void drag(int mouseX, int mouseY) {
 		drawing.add(new Point2D.Double(mouseX, mouseY));
 	}
