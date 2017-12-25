@@ -6,15 +6,14 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 	Controller control;
 
 	public void mouseDragged(MouseEvent e) {
+		// Get the mouse position and pass it into the drag method of the controller
 		int mouseX = e.getX();
 		int mouseY = e.getY();
 		control.drag(mouseX, mouseY);
 	}
 	
 	public void mouseReleased(MouseEvent e) {
-		int mouseX = e.getX();
-		int mouseY = e.getY();
-		control.release();
+		
 	}
 
 	public void mouseMoved(MouseEvent arg0) {
@@ -34,7 +33,9 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		
+		int mouseX = e.getX();
+		int mouseY = e.getY();
+		control.click(mouseX, mouseY);
 	}
 	
 	public MouseInput(Controller controller) {
